@@ -5,15 +5,17 @@ import { navData } from '../../../core/config/route';
 const Header = () => {
     return (
         <header className="header">
-            {navData.map(({ title, path }) => (
+            {navData.map(({ title, logo, path }) => (
                 <div key={path} className="header__item">
-                    <NavLink
-                        className="header__link"
-                        activeClassName="header__link--active"
-                        to={path}
-                    >
-                        {title}
-                    </NavLink>
+                    {logo ? (
+                        <NavLink to={path} className="header__link header__logo">
+                            <img src={logo} alt="Logo" />
+                        </NavLink>
+                    ) : (
+                        <NavLink to={path} className="header__link" activeClassName="header__link--active">
+                            {title}
+                        </NavLink>
+                    )}
                 </div>
             ))}
         </header>
