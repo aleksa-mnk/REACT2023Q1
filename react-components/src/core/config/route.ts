@@ -6,5 +6,5 @@ export const AppRoutes = {
 
 export const navData = [
   { logo: '/logo.svg', path: '/' },
-  { title: 'About Us', path: '/about' }
+  { title: 'About Us', path: '/about' },
 ];
