@@ -11,13 +11,15 @@ interface SearchBarState {
 
 class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   state: SearchBarState = {
-    inputValue: this.props.initialValue || '',
+    inputValue: '',
   };
 
   componentDidMount() {
     const savedInputValue = localStorage.getItem('searchBarInputValue');
     if (savedInputValue) {
       this.setState({ inputValue: savedInputValue });
+    } else if (this.props.initialValue) {
+      this.setState({ inputValue: this.props.initialValue });
     }
   }
 
@@ -26,7 +28,9 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ inputValue: event.target.value });
+    const value = event.target.value;
+    this.setState({ inputValue: value });
+    localStorage.setItem('searchBarInputValue', value);
   };
 
   render() {
