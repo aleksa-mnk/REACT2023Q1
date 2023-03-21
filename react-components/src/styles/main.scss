@@ -6,3 +6,10 @@
 @import './layout/Footer';
 @import './components/SearchBar';
 @import './components/CardList';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
