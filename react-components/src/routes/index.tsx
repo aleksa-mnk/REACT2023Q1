@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import About from '../pages/About';
 import NotFound from '../pages/NotFound';
@@ -11,8 +11,7 @@ class Router extends React.Component {
       <Routes>
         <Route path={AppRoutes.MAIN} element={<Home />} />
         <Route path={AppRoutes.ABOUT} element={<About />} />
-        <Route path={AppRoutes.NOT_FOUND_PAGE} element={<NotFound />} />
-        <Route path="*" element={<Navigate replace to={AppRoutes.NOT_FOUND_PAGE} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     );
   }
