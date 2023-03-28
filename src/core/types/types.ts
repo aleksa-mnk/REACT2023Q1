@@ -1,13 +1,12 @@
 import React, { RefObject } from 'react';
 
-type Errors = {
-  imgSrc: null;
-  date: null;
-  name: null;
-  lastName: null;
-  cat: null;
-  roles: null;
-  accepted: null;
+export type Errors = {
+  imgSrc: string | null | undefined;
+  date: string | null | undefined;
+  name: string | null | undefined;
+  cat: string | null | undefined;
+  roles: string | null | undefined;
+  accepted: string | null | undefined;
 };
 
 export type NewCardComponentProps = {
@@ -20,15 +19,6 @@ export type NewCardComponentProps = {
   male: boolean;
   female: boolean;
   accepted: boolean;
-};
-
-export type CardComponentProps = {
-  name: string;
-  birthday: string;
-  location: string;
-  image: string;
-  voice: string;
-  id: number;
 };
 
 export type FormCardComponentProps = {
@@ -68,15 +58,6 @@ export interface DateFieldProps {
   ) => void;
   errors: Errors;
 }
-
-export type CheckboxProps = {
-  errors: Errors;
-  maleInputRef: React.RefObject<HTMLInputElement>;
-  femaleInputRef: React.RefObject<HTMLInputElement>;
-  femaleChecked: boolean;
-  maleChecked: boolean;
-  onRoleChange: () => void;
-};
 
 export type FormComponent = {
   addCard: (data: NewCardComponentProps) => void;

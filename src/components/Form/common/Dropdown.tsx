@@ -1,8 +1,8 @@
 import React, { Component, RefObject } from 'react';
 import { Cats } from '../../../core/config/cats';
-import { CatSelectComponent } from '../../../core/types/types';
+import { CatSelectComponent, Errors } from '../../../core/types/types';
 
-class Dropdown extends Component<CatSelectComponent> {
+class Dropdown extends Component<CatSelectComponent & { errors: Errors }> {
   private catInputRef: RefObject<HTMLSelectElement>;
 
   constructor(props: CatSelectComponent) {
@@ -33,7 +33,7 @@ class Dropdown extends Component<CatSelectComponent> {
           id="cat"
         >
           <option className="form__option" value="">
-            Select cat
+            Please select a cat
           </option>
           {Cats.map(({ name, id }) => (
             <option key={id} className="form__option" value={name}>

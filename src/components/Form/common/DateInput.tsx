@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { DateFieldProps } from '../../../core/types/types';
+import { DateFieldProps, Errors } from '../../../core/types/types';
 
-class DateInput extends Component<DateFieldProps> {
+class DateInput extends Component<DateFieldProps & { errors: Errors }> {
   constructor(props: DateFieldProps) {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);

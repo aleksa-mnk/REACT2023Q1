@@ -7,7 +7,7 @@ import DateInput from '../Form/common/DateInput';
 import FileUpload from '../Form/common/FileUpload';
 import Switcher from '../Form/common/Switcher';
 import { getFormDefaultState } from '../../core/utils/form';
-import { nanoid } from 'nanoid';
+import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 import { helperForErrors } from './helper';
 
@@ -90,7 +90,7 @@ class Form extends PureComponent<FormComponent, unknown> {
     this.setState((state: { hasError: string; currentCard: NewCardComponentProps }) => {
       if (!state.hasError) {
         const newCard = { ...state.currentCard };
-        newCard.id = nanoid();
+        newCard.id = uuidv4();
         addCard(newCard);
         this.resetForm();
         return getFormDefaultState();

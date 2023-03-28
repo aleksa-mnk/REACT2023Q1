@@ -1,7 +1,16 @@
 import React from 'react';
-import { CheckboxProps } from '../../../core/types/types';
+import { Errors } from '../../../core/types/types';
 
-class CheckboxInput extends React.Component<CheckboxProps> {
+type Props = {
+  errors: Partial<Errors>;
+  maleInputRef: React.RefObject<HTMLInputElement>;
+  femaleInputRef: React.RefObject<HTMLInputElement>;
+  maleChecked: boolean;
+  femaleChecked: boolean;
+  onRoleChange: () => void;
+};
+
+class CheckboxInput extends React.Component<Props> {
   render() {
     const { errors, maleInputRef, femaleInputRef, femaleChecked, maleChecked, onRoleChange } =
       this.props;
@@ -15,11 +24,11 @@ class CheckboxInput extends React.Component<CheckboxProps> {
                 onChange={onRoleChange}
                 ref={maleInputRef}
                 type="checkbox"
-                id="front"
+                id="m"
                 value="male"
                 checked={maleChecked}
               />
-              <label className="form__label form__label--checkbox" htmlFor="front">
+              <label className="form__label form__label--checkbox" htmlFor="m">
                 MALE
               </label>
             </li>
@@ -29,17 +38,17 @@ class CheckboxInput extends React.Component<CheckboxProps> {
                 ref={femaleInputRef}
                 onChange={onRoleChange}
                 type="checkbox"
-                id="back"
+                id="f"
                 value="female"
                 checked={femaleChecked}
               />
-              <label className="form__label  form__label--checkbox" htmlFor="back">
+              <label className="form__label  form__label--checkbox" htmlFor="f">
                 FEMALE
               </label>
             </li>
           </ul>
         </fieldset>
-        {errors.roles && <span className="form__error-text">{errors.roles}</span>}
+        {errors && errors.roles && <span className="form__error-text">{errors.roles}</span>}
       </>
     );
   }
