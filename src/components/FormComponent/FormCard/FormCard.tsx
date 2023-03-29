@@ -16,9 +16,9 @@ class FormCard extends Component<FormCardProps> {
           <div className="form-card__country">Country: {country}</div>
           <div className="form-card__options">
             Options:
-            {pack && <span className="form-card__option">pack</span>}
-            {delivery && <span className="form-card__option">delivery</span>}
-            {transfer && <span className="form-card__option">transfer</span>}
+            {pack && <span className="form-card__option"> pack</span>}
+            {delivery && <span className="form-card__option"> delivery</span>}
+            {transfer && <span className="form-card__option"> transfer</span>}
           </div>
           <div className="form-card__pay">Pay: {pay}</div>
           <div className="form-card__image-container">
