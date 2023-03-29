@@ -227,9 +227,10 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
           )}
         </div>
         <div className="form__additional form-block">
-          Additional options:
+          <p>Additional options:</p>
+          <br />
           <label className="form__additional--label form-label" htmlFor="form__package">
-            &nbsp;Package:
+            Package:
           </label>
           <input
             className="form__additional--input form-input"
@@ -238,7 +239,7 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
             ref={inputPackage as LegacyRef<HTMLInputElement>}
           />
           <label className="form__additional form-label" htmlFor="form__delivery">
-            &nbsp;Delivery:
+            Delivery:
           </label>
           <input
             className="form__additional--input form-input"
@@ -247,7 +248,7 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
             ref={inputDelivery as LegacyRef<HTMLInputElement>}
           />
           <label className="form__additional form-label" htmlFor="form__transfer">
-            &nbsp;Transfer:
+            Transfer:
           </label>
           <input
             className="form__additional--input form-input"
