@@ -31,7 +31,7 @@ test('adds a new card to the list', () => {
   const fileList = {
     0: file,
     length: 1,
-    item: (index: number) => file,
+    item: () => file,
   } as unknown as FileList;
 
   Object.defineProperty(fileInput, 'files', {
