@@ -1,39 +1,41 @@
 import React, { Component } from 'react';
-import FormCardList from '../components/FormCardList/FormCardList';
-import Form from '../components/Form/Form';
-import { NewCardComponentProps, State } from '../core/types/types';
+import FormCard from '../components/FormComponent/FormCard/FormCard';
+import FormComponent from '../components/FormComponent/FormComponent';
+import { FormInput } from '../core/models/models';
 
-class FormPage extends Component<unknown, State> {
+interface FormPageState {
+  cards: FormInput[];
+}
+
+class FormPage extends Component<unknown, FormPageState> {
   constructor(props: unknown) {
     super(props);
     this.state = {
-      cardsData: [],
+      cards: [],
     };
+    this.addNewCard = this.addNewCard.bind(this);
   }
 
-  addCard = (cardData: NewCardComponentProps): void => {
-    this.setState({ cardsData: [...this.state.cardsData, cardData] });
-  };
+  addNewCard(newCard: FormInput): void {
+    this.setState((prevState: Readonly<FormPageState>) => ({
+      cards: [...prevState.cards, newCard],
+    }));
+  }
 
   render() {
-    const { cardsData } = this.state;
-    const hasCard = cardsData.length > 0;
-
+    const { cards } = this.state;
     return (
-      <>
-        <div className="container form">
-          <div className="form__img">
-            Form for adding
-            <br />
-            new characters
-          </div>
-          <div className="form__data">
-            <Form addCard={this.addCard} />
-
-            {hasCard && <FormCardList cardsData={cardsData} />}
-          </div>
+      <div data-testid="test-form" className="form-page">
+        <h1 className="page-header">Form Page</h1>
+        <div className="form-container">
+          <FormComponent addCard={this.addNewCard} />
         </div>
-      </>
+        <div className="card-container">
+          {cards.map((card) => (
+            <FormCard data-testid="test-form" key={card.id} card={card} />
+          ))}
+        </div>
+      </div>
     );
   }
 }
