@@ -9,7 +9,7 @@ const Header = () => {
         <div key={path} className="header__item">
           {logo ? (
             <NavLink to={path} className="header__link header__logo">
-              <img src={logo} alt="Logo" />
+              <img src={logo} alt="Logo" height="30px" />
             </NavLink>
           ) : (
             <NavLink

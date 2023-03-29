@@ -6,7 +6,7 @@ export const AppRoutes = {
 };
 
 export const navData = [
-  { logo: '/logo.svg', path: '/' },
+  { logo: 'https://cdn.logo.com/hotlink-ok/logo-social.png', path: '/' },
   { title: 'About Us', path: '/about' },
   { title: 'Form', path: '/form' },
 ];
