@@ -1,5 +1,5 @@
 import React, { LegacyRef } from 'react';
-import { FormProps, FormValidState } from '../../core/models/models';
+import { FormProps, FormValidState } from '../../core/models/model';
 
 import {
   validateCountry,
@@ -36,6 +36,7 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
       inputPictureValid: true,
       inputPictureUrl: '',
       formValid: false,
+      inputCheckboxValid: true,
     };
   }
 
@@ -44,7 +45,10 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
       const inputRef = this.inputRefs[key];
       if (inputRef.current) {
         const input = inputRef.current as HTMLInputElement | HTMLSelectElement;
-        if (input instanceof HTMLInputElement && input.type === 'checkbox') {
+        if (
+          input instanceof HTMLInputElement &&
+          (input.type === 'checkbox' || input.type === 'radio')
+        ) {
           input.checked = false;
         } else {
           input.value = '';
@@ -76,6 +80,7 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
       inputCashPay as React.RefObject<HTMLInputElement>,
       inputCardPay as React.RefObject<HTMLInputElement>
     );
+    const checkboxValid = !(!packageValid && !deliveryValid && !transferValid);
     const pictureValid = validatePicture(inputPicture?.current?.value || '');
 
     this.setState({
@@ -87,13 +92,12 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
       inputTransferValid: transferValid,
       inputPayValid: payValid,
       inputPictureValid: pictureValid,
+      inputCheckboxValid: checkboxValid,
+      formValid:
+        titleValid && dateValid && countryValid && payValid && pictureValid && checkboxValid,
     });
 
-    this.setState({
-      formValid: titleValid && dateValid && countryValid && payValid && pictureValid,
-    });
-
-    return titleValid && dateValid && countryValid && payValid && pictureValid;
+    return titleValid && dateValid && countryValid && payValid && pictureValid && checkboxValid;
   }
 
   formSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -141,6 +145,7 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
       inputPayValid,
       inputPictureValid,
       formValid,
+      inputCheckboxValid,
     } = this.state;
 
     const {
@@ -250,6 +255,9 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
             id="form__transfer"
             ref={inputTransfer as LegacyRef<HTMLInputElement>}
           />
+          {!inputCheckboxValid && (
+            <span className="form__payment--span error-span">Please select a checkbox.</span>
+          )}
         </div>
         <div className="form__payment form-block">
           <label className="form__payment--label form-label" htmlFor="form__cash-pay">

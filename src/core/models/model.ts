@@ -54,7 +54,7 @@ export type FormValidState = {
   inputDeliveryValid?: boolean;
   inputPayValid: boolean;
   formValid: boolean;
-  inputCheckboxValid?: boolean;
+  inputCheckboxValid: boolean;
   inputPictureValid?: boolean;
   inputPictureUrl?: string;
 };
