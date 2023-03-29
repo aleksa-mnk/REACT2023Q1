@@ -1,6 +1,6 @@
 import React, { LegacyRef } from 'react';
 import { FormProps, FormValidState } from '../../core/models/model';
-
+import DateInput from './common/DateInput';
 import {
   validateCountry,
   validateDate,
@@ -8,6 +8,11 @@ import {
   validatePicture,
   validateText,
 } from '../../core/utils/formValidation';
+import TitleInput from './common/TitleInput';
+import CountrySelect from './common/CountrySelect';
+import AdditionalOptions from './common/AdditionalOptions';
+import PaymentOptions from './common/PaymentOptions';
+import PictureInput from './common/PictureInput';
 
 class FormComponent extends React.Component<FormProps, FormValidState> {
   formRef: React.RefObject<HTMLFormElement> = React.createRef();
@@ -58,30 +63,21 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
   }
 
   checkFormFields() {
-    const {
-      inputTitle,
-      inputDate,
-      inputCountry,
-      inputPackage,
-      inputDelivery,
-      inputTransfer,
-      inputCashPay,
-      inputCardPay,
-      inputPicture,
-    } = this.inputRefs;
-
-    const titleValid = validateText(inputTitle?.current?.value || '');
-    const dateValid = validateDate(inputDate?.current?.value || '');
-    const countryValid = validateCountry(inputCountry?.current?.value || '');
-    const packageValid = !!(inputPackage.current as HTMLInputElement | null)?.checked;
-    const deliveryValid = !!(inputDelivery.current as HTMLInputElement | null)?.checked;
-    const transferValid = !!(inputTransfer?.current as HTMLInputElement | null)?.checked;
+    const titleValid = validateText(this.inputRefs.inputTitle?.current?.value || '');
+    const dateValid = validateDate(this.inputRefs.inputDate?.current?.value || '');
+    const countryValid = validateCountry(this.inputRefs.inputCountry?.current?.value || '');
+    const packageValid = !!(this.inputRefs.inputPackage.current as HTMLInputElement | null)
+      ?.checked;
+    const deliveryValid = !!(this.inputRefs.inputDelivery.current as HTMLInputElement | null)
+      ?.checked;
+    const transferValid = !!(this.inputRefs.inputTransfer?.current as HTMLInputElement | null)
+      ?.checked;
     const payValid = validatePayment(
-      inputCashPay as React.RefObject<HTMLInputElement>,
-      inputCardPay as React.RefObject<HTMLInputElement>
+      this.inputRefs.inputCashPay as React.RefObject<HTMLInputElement>,
+      this.inputRefs.inputCardPay as React.RefObject<HTMLInputElement>
     );
     const checkboxValid = !(!packageValid && !deliveryValid && !transferValid);
-    const pictureValid = validatePicture(inputPicture?.current?.value || '');
+    const pictureValid = validatePicture(this.inputRefs.inputPicture?.current?.value || '');
 
     this.setState({
       inputTitleValid: titleValid,
@@ -162,143 +158,33 @@ class FormComponent extends React.Component<FormProps, FormValidState> {
 
     return (
       <form className="form" onSubmit={this.formSubmit} ref={this.formRef}>
-        <div className="form__title form-block">
-          <label className="form__title--label form-label" htmlFor="form__title-input">
-            Title:
-          </label>
-          <input
-            className="form__title--input form-input"
-            type="text"
-            id="form__title-input"
-            ref={inputTitle as LegacyRef<HTMLInputElement>}
-            placeholder="title"
-            autoComplete="off"
-          />
-          {!inputTitleValid && (
-            <span className="form__title--span error-span">
-              Text must be at least 4 characters long
-            </span>
-          )}
-        </div>
-        <div className="form__date form-block">
-          <label className="form__date--label form-label" htmlFor="form__date">
-            Date:
-          </label>
-          <input
-            className="form__date--input form-input"
-            type="date"
-            id="form__date"
-            ref={inputDate as LegacyRef<HTMLInputElement>}
-            placeholder="date"
-            autoComplete="off"
-          />
-          {!inputDateValid && (
-            <span className="form__date--span error-span">Date must be in the past.</span>
-          )}
-        </div>
-        <div className="form__country form-block">
-          <label className="form__country--label form-label" htmlFor="form__country">
-            Country:
-          </label>
-          <select
-            className="form__country--select form-select"
-            id="form__country"
-            ref={inputCountry as LegacyRef<HTMLSelectElement>}
-            defaultValue=""
-          >
-            <option className="form__country--option" disabled>
-              {}
-            </option>
-            <option className="form__country--option" value="USA">
-              USA
-            </option>
-            <option className="form__country--option" value="Canada">
-              Canada
-            </option>
-            <option className="form__country--option" value="Mexico">
-              Mexico
-            </option>
-            <option className="form__country--option" value="Germany">
-              Germany
-            </option>
-          </select>
-          {!inputCountryValid && (
-            <span className="form__country--span error-span">Please select a country.</span>
-          )}
-        </div>
-        <div className="form__additional form-block">
-          <p>Additional options:</p>
-          <br />
-          <label className="form__additional--label form-label" htmlFor="form__package">
-            Package:
-          </label>
-          <input
-            className="form__additional--input form-input"
-            type="checkbox"
-            id="form__package"
-            ref={inputPackage as LegacyRef<HTMLInputElement>}
-          />
-          <label className="form__additional form-label" htmlFor="form__delivery">
-            Delivery:
-          </label>
-          <input
-            className="form__additional--input form-input"
-            type="checkbox"
-            id="form__delivery"
-            ref={inputDelivery as LegacyRef<HTMLInputElement>}
-          />
-          <label className="form__additional form-label" htmlFor="form__transfer">
-            Transfer:
-          </label>
-          <input
-            className="form__additional--input form-input"
-            type="checkbox"
-            id="form__transfer"
-            ref={inputTransfer as LegacyRef<HTMLInputElement>}
-          />
-          {!inputCheckboxValid && (
-            <span className="form__payment--span error-span">Please select a checkbox.</span>
-          )}
-        </div>
-        <div className="form__payment form-block">
-          <label className="form__payment--label form-label" htmlFor="form__cash-pay">
-            Cash:
-          </label>
-          <input
-            className="form__payment--input form-input"
-            type="radio"
-            id="form__cash-pay"
-            value="cash"
-            name="pay"
-            ref={inputCashPay as LegacyRef<HTMLInputElement>}
-          />
-          <label className="form__payment--label form-label" htmlFor="form__card-pay">
-            Card:
-          </label>
-          <input
-            className="form__payment--input form-input"
-            type="radio"
-            id="form__card-pay"
-            value="card"
-            name="pay"
-            ref={inputCardPay as LegacyRef<HTMLInputElement>}
-          />
-          {!inputPayValid && (
-            <span className="form__payment--span error-span">Please select a payment option.</span>
-          )}
-        </div>
-        <div className="form__picture form-block">
-          <label htmlFor="form__card-picture">Profile picture:</label>
-          <input
-            id="form__card-picture"
-            className="form__picture--input form-input"
-            type="file"
-            ref={inputPicture as LegacyRef<HTMLInputElement>}
-          />
-          {!inputPictureValid && (
-            <span className="form__picture--span error-span">Please upload a picture.</span>
-          )}
-        </div>
+        <TitleInput
+          inputTitleRef={inputTitle as LegacyRef<HTMLInputElement>}
+          inputTitleValid={inputTitleValid}
+        />
+        <DateInput
+          inputDateRef={inputDate as LegacyRef<HTMLInputElement>}
+          inputDateValid={inputDateValid}
+        />
+        <CountrySelect
+          inputCountry={inputCountry as LegacyRef<HTMLSelectElement>}
+          inputCountryValid={inputCountryValid}
+        />
+        <AdditionalOptions
+          inputPackage={inputPackage as React.RefObject<HTMLInputElement>}
+          inputDelivery={inputDelivery as React.RefObject<HTMLInputElement>}
+          inputTransfer={inputTransfer as React.RefObject<HTMLInputElement>}
+          inputCheckboxValid={inputCheckboxValid}
+        />
+        <PaymentOptions
+          inputCashPay={inputCashPay as LegacyRef<HTMLInputElement>}
+          inputCardPay={inputCardPay as LegacyRef<HTMLInputElement>}
+          inputPayValid={inputPayValid}
+        />
+        <PictureInput
+          inputPicture={inputPicture as LegacyRef<HTMLInputElement> | undefined}
+          inputPictureValid={inputPictureValid as boolean}
+        />
         <button className="form__button" data-testid="add-card" type="submit" name="Submit">
           Add new card
         </button>
