@@ -1,0 +1,52 @@
+.CurdSnackList {
+  padding: 0px 15px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+
+.card {
+  color: #c0c0c0 !important;
+  background-color: #2E2E30;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  min-width: 310px;
+  max-width: 570px;
+  border: 4px solid #29282B;
+}
+
+.card__image {
+  padding-top: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.card__content {
+  padding: 20px;
+}
+
+.card__content__title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.card__content__info {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #989898;
+}
+
+.card__content__rating {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.main {
+  width: 100%;
+  max-width: 1280px;
+}
