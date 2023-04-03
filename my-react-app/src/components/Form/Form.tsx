@@ -20,7 +20,7 @@ export const Form = (): JSX.Element => {
     ]);
 
     setIsAlertShowed(true);
-    setTimeout(() => setIsAlertShowed(false), 4000);
+    setTimeout(() => setIsAlertShowed(false), 5000);
   };
 
   return (

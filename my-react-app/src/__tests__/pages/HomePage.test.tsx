@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import HomePage from '../../pages/HomePage';
 import { describe, expect, it } from 'vitest';
 import React from 'react';
+
 /**
  * @vitest-environment jsdom
  */
