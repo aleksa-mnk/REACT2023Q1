@@ -25,6 +25,7 @@ const SearchBar = ({ onInputChange, onClearInput }: SearchBarProps) => {
     <>
       <div className="search-bar-container">
         <input
+          data-testid="Home"
           type="text"
           placeholder="Search..."
           className="search-bar"
@@ -35,7 +36,11 @@ const SearchBar = ({ onInputChange, onClearInput }: SearchBarProps) => {
           }}
         />
         {searchInput.length > 0 && (
-          <FaTimes className="fas fa-times search-bar-clear" onClick={onClearInput} />
+          <FaTimes
+            data-testid="clear-button"
+            className="fas fa-times search-bar-clear"
+            onClick={onClearInput}
+          />
         )}
       </div>
     </>
