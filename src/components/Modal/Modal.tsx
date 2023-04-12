@@ -31,7 +31,10 @@ const Modal = ({ isOpen, onClose, card }: ModalProps) => {
   return (
     <div className="overlay">
       <div className="modal">
-        <FaTimes onClick={handleClose} className="fas fa-times modal__close-button search-bar-clear" />
+        <FaTimes
+          onClick={handleClose}
+          className="fas fa-times modal__close-button search-bar-clear"
+        />
         <div className="modal__content">
           <img src={card.imageUrl} alt={card.title} />
           <h2>{card.title}</h2>

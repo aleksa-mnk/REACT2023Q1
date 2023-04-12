@@ -20,7 +20,6 @@ const Card = ({ card, onCardClick }: CardProps) => {
       </div>
       <div className="card-item__content">
         <h3 className="card-item__title">{card.title}</h3>
-        <p className="card-item__rating">Rating: {card.rating}</p>
       </div>
     </div>
   );
