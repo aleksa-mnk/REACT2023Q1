@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaTimes } from 'react-icons/fa';
 
 interface Card {
   id: string;
@@ -28,17 +29,20 @@ const Modal = ({ isOpen, onClose, card }: ModalProps) => {
   };
 
   return (
-    <div className="overlay" onClick={handleClose}>
+    <div className="overlay">
       <div className="modal">
-        <button className="close-button" onClick={handleClose}>
-          X
-        </button>
-        <div className="modal-content">
+        <FaTimes onClick={handleClose} className="fas fa-times modal__close-button search-bar-clear" />
+        <div className="modal__content">
           <img src={card.imageUrl} alt={card.title} />
           <h2>{card.title}</h2>
           <p>Slug: {card.slug}</p>
           <p>Rating: {card.rating}</p>
-          <p>Source: {card.source}</p>
+          <p>
+            Source:{' '}
+            <a className="modal__source" href={card.source}>
+              {card.source}
+            </a>
+          </p>
         </div>
       </div>
     </div>
