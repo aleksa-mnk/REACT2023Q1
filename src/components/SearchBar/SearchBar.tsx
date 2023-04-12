@@ -1,49 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import React from "react";
 
 interface SearchBarProps {
-  searchInput: string;
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClearInput: () => void;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 }
 
-const SearchBar = ({ onInputChange, onClearInput }: SearchBarProps) => {
-  const [searchInput, setSearchInput] = useState('');
-
-  useEffect(() => {
-    const searchInputFromLocalStorage = localStorage.getItem('searchInput');
-    if (searchInputFromLocalStorage) {
-      setSearchInput(searchInputFromLocalStorage);
+const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onSubmit();
     }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('searchInput', searchInput);
-  }, [searchInput]);
+  };
 
   return (
-    <>
-      <div className="search-bar-container">
+      <div>
         <input
-          data-testid="Home"
-          type="text"
-          placeholder="Search..."
-          className="search-bar"
-          value={searchInput}
-          onChange={(e) => {
-            setSearchInput(e.target.value);
-            onInputChange(e);
-          }}
+            type="text"
+            placeholder="Search"
+            value={value}
+            onChange={onChange}
+            onKeyPress={handleKeyPress}
         />
-        {searchInput.length > 0 && (
-          <FaTimes
-            data-testid="clear-button"
-            className="fas fa-times search-bar-clear"
-            onClick={onClearInput}
-          />
-        )}
+        <button onClick={onSubmit}>Search</button>
       </div>
-    </>
   );
 };
 

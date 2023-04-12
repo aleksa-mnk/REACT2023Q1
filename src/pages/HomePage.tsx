@@ -1,29 +1,57 @@
-import * as React from 'react';
-import SearchBar from '../components/SearchBar/SearchBar';
-import { useState } from 'react';
-import CurdSnackList from '../components/CardList/CardList';
-import data from '../core/data/curdSnackData.json';
+import React, {useState} from "react";
+import {searchGifs} from "../core/config/api";
+import SearchBar from "../components/SearchBar/SearchBar";
+import Loader from "../components/Loader/Loader";
+import CardList from "../components/CardList/CardList";
+import Modal from "../components/Modal/Modal";
+import { ICard } from "../components/CardItem/CardItem";
 
 const HomePage = () => {
-  const [searchInput, setSearchInput] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<ICard | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setSearchInput(event.target.value);
-  }
+  const handleSearch = async () => {
+    try {
+      setIsLoading(true);
+      const results = await searchGifs(searchText);
+      setSearchResults(results);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-  function handleClearInput() {
-    setSearchInput('');
-  }
+  const handleCardClick = (card: ICard) => {
+    console.log('Click', card)
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCard(null);
+    setIsModalOpen(false);
+  };
 
   return (
-    <>
-      <SearchBar
-        searchInput={searchInput}
-        onInputChange={handleInputChange}
-        onClearInput={handleClearInput}
-      />
-      <CurdSnackList data={data} searchText={searchInput} />
-    </>
+      <div>
+        <SearchBar
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+            onSubmit={handleSearch}
+        />
+        {isLoading ? (
+            <Loader />
+        ) : (
+            <CardList cards={searchResults} onCardClick={handleCardClick} />
+        )}
+        {selectedCard && (
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} card={selectedCard} />
+        )}
+      </div>
   );
 };
 

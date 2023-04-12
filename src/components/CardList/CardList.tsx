@@ -1,24 +1,18 @@
-import React from 'react';
-import CurdSnackCard, { CurdSnackCardProps } from '../CardItem/CardItem';
+import CardItem, {ICard} from "../CardItem/CardItem";
 
-interface CurdSnackListProps {
-  data: CurdSnackCardProps[];
-  searchText: string;
+interface CardListProps {
+    cards: ICard[];
+    onCardClick: (card: ICard) => void;
 }
 
-const CurdSnackList = ({ data, searchText }: CurdSnackListProps) => {
-  const filteredData = React.useMemo(
-    () => data.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase())),
-    [data, searchText]
-  );
-
-  return (
-    <div className="CurdSnackList">
-      {filteredData.map((item) => (
-        <CurdSnackCard key={item.name} {...item} />
-      ))}
-    </div>
-  );
+const CardList = ({ cards, onCardClick }: CardListProps) => {
+    return (
+        <div className="card-list">
+            {cards.map((card) => (
+                <CardItem key={card.id} card={card} onCardClick={onCardClick} />
+            ))}
+        </div>
+    );
 };
 
-export default CurdSnackList;
+export default CardList;
