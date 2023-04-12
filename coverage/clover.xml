@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681324258619" clover="3.2.0">
-  <project timestamp="1681324258620" name="All files">
-    <metrics statements="723" coveredstatements="530" conditionals="66" coveredconditionals="54" methods="55" coveredmethods="38" elements="844" coveredelements="622" complexity="0" loc="723" ncloc="723" packages="16" files="27" classes="27"/>
+<coverage generated="1681324637746" clover="3.2.0">
+  <project timestamp="1681324637746" name="All files">
+    <metrics statements="724" coveredstatements="530" conditionals="66" coveredconditionals="54" methods="55" coveredmethods="38" elements="845" coveredelements="622" complexity="0" loc="724" ncloc="724" packages="16" files="27" classes="27"/>
     <package name="components.CardItem">
       <metrics statements="28" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="CardItem.tsx" path="C:\Users\Aleksa\Desktop\apo\REACT2023Q1\src\components\CardItem\CardItem.tsx">
@@ -174,9 +174,9 @@
       </file>
     </package>
     <package name="components.SearchBar">
-      <metrics statements="49" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="50" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="SearchBar.tsx" path="C:\Users\Aleksa\Desktop\apo\REACT2023Q1\src\components\SearchBar\SearchBar.tsx">
-        <metrics statements="49" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="50" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -224,8 +224,9 @@
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
       </file>
     </package>
     <package name="components.SnackCard">
