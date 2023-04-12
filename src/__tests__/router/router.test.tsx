@@ -11,12 +11,12 @@ import Router from '../../routes';
 describe('Router', () => {
   it('renders the correct routes', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/about']}>
         <Router />
       </MemoryRouter>
     );
 
-    expect(screen.getByTestId('Home')).toBeInTheDocument();
+    expect(screen.getByText('Сырок на ножках')).toBeInTheDocument();
   });
 
   it('renders the NotFoundPage when a route is not found', () => {

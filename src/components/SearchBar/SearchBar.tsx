@@ -29,6 +29,7 @@ const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
   return (
     <div className="search-bar-container">
       <input
+        data-testid="Home"
         type="text"
         placeholder="Search"
         className="search-bar"
