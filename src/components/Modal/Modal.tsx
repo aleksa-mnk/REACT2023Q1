@@ -29,9 +29,10 @@ const Modal = ({ isOpen, onClose, card }: ModalProps) => {
   };
 
   return (
-    <div className="overlay">
+    <div className="overlay" role="dialog" aria-modal="true">
       <div className="modal">
         <FaTimes
+          role="button"
           onClick={handleClose}
           className="fas fa-times modal__close-button search-bar-clear"
         />

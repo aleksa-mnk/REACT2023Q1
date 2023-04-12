@@ -14,7 +14,7 @@ interface CardProps {
 
 const Card = ({ card, onCardClick }: CardProps) => {
   return (
-    <div className="card-item" onClick={() => onCardClick(card)}>
+    <div className="card-item" onClick={() => onCardClick(card)} data-testid="card-item">
       <div className="card-item__image-container">
         <img src={card.imageUrl} alt={card.title} />
       </div>
