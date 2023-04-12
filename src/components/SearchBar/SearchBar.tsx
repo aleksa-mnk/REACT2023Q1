@@ -26,11 +26,6 @@ const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
     }
   };
 
-  const handleClear = () => {
-    setSearchText('');
-    onSubmit();
-  };
-
   return (
     <div className="search-bar-container">
       <input
@@ -44,7 +39,7 @@ const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
         }}
         onKeyPress={handleKeyPress}
       />
-      <button className="search-bar-clear" onClick={handleClear}>
+      <button className="search-bar-submit" onClick={onSubmit}>
         Search
       </button>
     </div>
