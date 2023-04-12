@@ -7,23 +7,28 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
-  const [searchInput, setSearchInput] = useState('');
+  const [searchText, setSearchText] = useState(value);
 
   useEffect(() => {
-    const searchInputFromLocalStorage = localStorage.getItem('searchInput');
-    if (searchInputFromLocalStorage) {
-      setSearchInput(searchInputFromLocalStorage);
+    const savedValue = localStorage.getItem('searchText');
+    if (savedValue) {
+      setSearchText(savedValue);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('searchInput', searchInput);
-  }, [searchInput]);
+    localStorage.setItem('searchText', searchText);
+  }, [searchText]);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       onSubmit();
     }
+  };
+
+  const handleClear = () => {
+    setSearchText('');
+    onSubmit();
   };
 
   return (
@@ -32,11 +37,14 @@ const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
         type="text"
         placeholder="Search"
         className="search-bar"
-        value={value ? value : searchInput}
-        onChange={onChange}
+        value={searchText}
+        onChange={(event) => {
+          setSearchText(event.target.value);
+          onChange(event);
+        }}
         onKeyPress={handleKeyPress}
       />
-      <button className="search-button" onClick={onSubmit}>
+      <button className="search-bar-clear" onClick={handleClear}>
         Search
       </button>
     </div>
