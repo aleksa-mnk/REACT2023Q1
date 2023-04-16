@@ -1,94 +1,74 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: #e1fff9;
+$primary-color: #FFAE74;
+$secondary-color: #D7D1E3;
+$accent-color: #262526;
+
+$body-font: 'Open Sans', sans-serif;
+$header-font: 'Montserrat', sans-serif;
+
+.snack-form {
+  border: 4px solid #2E2E30;
+  background-color: $accent-color;
+  border-radius: 10px;
   padding: 20px;
-
-  .form-block {
-    margin-bottom: 20px;
-
-    .form-input {
-      border: 2px solid #ccc;
-      padding: 10px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .error-span {
-      color: red;
-    }
-  }
-
-  .form__button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .message-span {
-    color: green;
-  }
 }
 
-.form-card {
-  border: 2px solid #ccc;
-  border-radius: 5px;
+.form-control {
+  margin-bottom: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 280px;
-  margin: 0 auto;
-  padding: 20px;
+  flex-direction: column;
+}
 
-  &__image {
-    margin-top: 20px;
-    max-width: 200px;
-  }
+.form-label {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: $primary-color;
+}
 
-  &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+#input-taste {
+  margin-left: 5px;
+}
 
-    &__title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+.form-input, select {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: $secondary-color;
+}
 
-    &__date, &__country, &__pay {
-      margin-bottom: 5px;
-    }
+.invalid-feedback {
+  color: red;
+  margin-top: 5px;
+}
 
-    &__options {
-      margin-top: 10px;
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 
-      &__option {
-        display: inline-block;
-        margin-right: 10px;
-        background-color: #f7f7f7;
-        padding: 5px;
-        border-radius: 5px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #555;
-      }
-    }
+.button_primary {
+  background-color: $primary-color;
+  color: #fff;
+}
 
-    &__image-container {
-      margin-top: 20px;
+.button_default {
+  background-color: $secondary-color;
+  color: $primary-color;
+  margin-left: 10px;
+}
 
-      &__image {
-        max-width: 200px;
-      }
-    }
-  }
+.CurdSnackList {
+  margin-top: 40px;
+}
+
+.no-data {
+  font-size: 24px;
+  color: $primary-color;
+  text-align: center;
 }
 
 .card-container {
@@ -98,4 +78,34 @@
   align-items: center;
   justify-content: center;
   padding: 60px;
+}
+
+.storage-mode__options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.storage-mode__option {
+  display: flex;
+  gap: 6px;
+}
+
+.snack-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-label-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.flex {
+  display: flex;
+  gap: 20px;
+  max-width: 320px;
+  flex-wrap: wrap;
 }

@@ -5,11 +5,11 @@ import { Fragment } from 'react';
 
 export const Ingredients = ({ field, register, errors }: TypeInputProps) => (
   <div className="form-control" data-invalid={!!errors.ingredients}>
-    <h3 className="form-header">Ingredients</h3>
+    <label className="form-label">Ingredients</label>
     <div className="flex">
       {ingredients.map((item) => (
         <Fragment key={item.id}>
-          <label className="form-label">
+          <label className="form-label-checkbox">
             <input
               {...register(field, {
                 validate: {
@@ -26,6 +26,6 @@ export const Ingredients = ({ field, register, errors }: TypeInputProps) => (
         </Fragment>
       ))}
     </div>
-    <div className="invalid-feedback">{errors.ingredients && errors.ingredients.message}</div>
+    <div className="error">{errors.ingredients && errors.ingredients.message}</div>
   </div>
 );

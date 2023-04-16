@@ -26,6 +26,6 @@ export const StorageMode = ({ field, register, errors }: TypeInputProps) => (
         );
       })}
     </div>
-    <div className="storage-mode__error">{errors.storageMode && errors.storageMode.message}</div>
+    <div className="error">{errors.storageMode && errors.storageMode.message}</div>
   </div>
 );

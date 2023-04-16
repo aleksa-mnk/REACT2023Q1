@@ -11,7 +11,9 @@ const TasteOptions = options.map((option) => (
 
 export const Taste = ({ field, register, errors }: TypeInputProps) => (
   <div data-invalid={!!errors.taste}>
-    <label htmlFor="input-taste">Taste</label>
+    <label className="form-label" htmlFor="input-taste">
+      Taste
+    </label>
     <select
       id="input-taste"
       {...register(field, {
@@ -21,6 +23,6 @@ export const Taste = ({ field, register, errors }: TypeInputProps) => (
     >
       {TasteOptions}
     </select>
-    <div>{errors.taste && errors.taste.message}</div>
+    <div className="error">{errors.taste && errors.taste.message}</div>
   </div>
 );

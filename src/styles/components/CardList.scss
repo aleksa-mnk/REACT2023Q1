@@ -3,7 +3,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-gap: 5px;
-  cursor: pointer;
   grid-auto-rows: minmax(100px, auto);
 }
 
@@ -71,4 +70,20 @@
 .card-item__rating {
   margin: 0;
   font-size: 14px;
+}
+
+.card-item__image {
+  max-width: 320px;
+}
+
+.curd {
+  max-width: 300px;
+}
+
+.error {
+  color: #ff0000;
+}
+
+.card__content {
+  padding: 12px 10px;
 }
