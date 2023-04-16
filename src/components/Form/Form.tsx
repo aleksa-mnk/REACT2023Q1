@@ -10,17 +10,18 @@ export const Form = (): JSX.Element => {
   const [isAlertShowed, setIsAlertShowed] = useState(false);
 
   const addSnack = (snack: IFormValues): void => {
-    setSnacks([
-      ...snacks,
-      {
+    try {
+      const newSnack: ISnack = {
         ...snack,
         id: `${Date.now()}`,
         image: createUrl(snack.image),
-      },
-    ]);
-
-    setIsAlertShowed(true);
-    setTimeout(() => setIsAlertShowed(false), 5000);
+      };
+      setSnacks((prevSnacks) => [...prevSnacks, newSnack]);
+      setIsAlertShowed(true);
+      setTimeout(() => setIsAlertShowed(false), 5000);
+    } catch (error) {
+      console.error(`Failed to add snack. Error: ${(error as Error).message}`);
+    }
   };
 
   return (

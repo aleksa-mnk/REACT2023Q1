@@ -1,16 +1,4 @@
-export interface ICard {
-  id: string;
-  title: string;
-  imageUrl: string;
-  slug: string;
-  rating: string;
-  source: string;
-}
-
-interface CardProps {
-  card: ICard;
-  onCardClick: (card: ICard) => void;
-}
+import { CardProps } from '../../core/types';
 
 const Card = ({ card, onCardClick }: CardProps) => {
   return (

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { searchGifs } from '../core/config/api';
 import SearchBar from '../components/SearchBar/SearchBar';
-import Loader from '../components/Loader/Loader';
+import Loader from '../components/ui/Loader';
 import CardList from '../components/CardList/CardList';
 import Modal from '../components/Modal/Modal';
-import { ICard } from '../components/CardItem/CardItem';
+import { ICard } from '../core/types';
 
 const HomePage = () => {
   const [searchText, setSearchText] = useState(() => {

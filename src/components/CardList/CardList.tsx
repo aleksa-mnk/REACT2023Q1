@@ -1,9 +1,5 @@
-import CardItem, { ICard } from '../CardItem/CardItem';
-
-interface CardListProps {
-  cards: ICard[];
-  onCardClick: (card: ICard) => void;
-}
+import CardItem from './CardItem';
+import { CardListProps } from '../../core/types';
 
 const CardList = ({ cards, onCardClick }: CardListProps) => {
   return (
