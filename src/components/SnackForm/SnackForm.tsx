@@ -26,24 +26,22 @@ export const SnackForm = ({ addSnack }: ISnackFormProps): JSX.Element => {
   );
 
   return (
-    <div className="snack-form">
-      <form onSubmit={handleSubmit(submitForm)}>
-        <SnackName field="snackName" register={register} errors={errors} />
-        <ProductionDate field="productionDate" register={register} errors={errors} />
-        <Taste field="taste" register={register} errors={errors} />
-        <Ingredients field="ingredients" register={register} errors={errors} />
-        <StorageMode field="storageMode" register={register} errors={errors} />
-        <SnackImage field="image" register={register} errors={errors} />
-        <div className="snack-form__row flex-center">
-          <Button type="submit" variant="primary" aria-label="button-submit">
-            Send
-          </Button>
-          <Button type="button" aria-label="button-reset" onClick={() => reset()}>
-            Reset
-          </Button>
-        </div>
-      </form>
-    </div>
+    <form className="snack-form" onSubmit={handleSubmit(submitForm)}>
+      <SnackName field="snackName" register={register} errors={errors} />
+      <ProductionDate field="productionDate" register={register} errors={errors} />
+      <Taste field="taste" register={register} errors={errors} />
+      <Ingredients field="ingredients" register={register} errors={errors} />
+      <StorageMode field="storageMode" register={register} errors={errors} />
+      <SnackImage field="image" register={register} errors={errors} />
+      <div className="snack-form__row flex-center">
+        <Button type="submit" variant="primary" aria-label="button-submit">
+          Send
+        </Button>
+        <Button type="button" aria-label="button-reset" onClick={() => reset()}>
+          Reset
+        </Button>
+      </div>
+    </form>
   );
 };
 

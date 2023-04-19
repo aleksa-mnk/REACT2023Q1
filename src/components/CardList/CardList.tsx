@@ -1,16 +1,12 @@
-import CardItem, { ICard } from '../CardItem/CardItem';
+import CardItem from './CardItem';
+import { CardListProps } from '../../core/types';
+import { GiphyResponse } from '../../core/store/giphyApi';
 
-interface CardListProps {
-  cards: ICard[];
-  onCardClick: (card: ICard) => void;
-}
-
-const CardList = ({ cards, onCardClick }: CardListProps) => {
+const CardList = ({ cards }: CardListProps) => {
   return (
     <div className="card-list">
-      {cards.map((card) => (
-        <CardItem key={card.id} card={card} onCardClick={onCardClick} />
-      ))}
+      {Array.isArray(cards.data) &&
+        cards.data.map((card: GiphyResponse) => <CardItem key={card.id} card={card} />)}
     </div>
   );
 };

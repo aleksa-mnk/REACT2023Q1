@@ -3,39 +3,28 @@ import * as React from 'react';
 const AboutPage = () => {
   return (
     <div className="about">
-      <h2 className="about__title">Сырок на ножках</h2>
+      <h2 className="about__title">Cicada</h2>
       <p className="about__text">
-        Жил-был гимнастический конь по имени Гарри. Он проводил свои дни в спортивном зале, прыгая и
-        вращаясь, и мечтал стать настоящей звездой гимнастики.
+        Have you ever heard the song of the cicada? It&apos;s a melody that fills the air, a
+        symphony of sound that seems to come from everywhere. But did you know that there&apos;s
+        more to these little insects than meets the eye?
       </p>
-
       <p className="about__text">
-        Однажды в зал заглянула добрая фея, которая увидела Гарри и его талант в гимнастике. Фея
-        была очень впечатлена и решила наградить Гарри за его старания. Она произнесла заклинание, и
-        волшебным образом Гарри превратился в глазированный творожный сырок на ножках!
+        Deep in the forests, where the trees grow tall and the sunlight filters through the leaves,
+        there lies a secret that few have ever seen. It&apos;s said that there&apos;s a hidden tribe
+        of cicadas, who gather once every hundred years to perform a mysterious ritual. They sing a
+        song so powerful, so pure, that it has the power to change the course of history.
       </p>
-
       <p className="about__text">
-        Гарри, теперь уже глазированный творожный сырок на ножках, был очень смущен своей новой
-        формой. Но он был удивлен, когда увидел, что наряду с ним в зал вошла такая же фигура, как
-        он. Это был мем, который взял его облик и стал популярным среди людей в интернете!
+        But what is the secret of this ancient melody? Some say that it holds the key to unlocking
+        the mysteries of the universe, while others believe that it&apos;s simply a way for the
+        cicadas to communicate with one another. Still, others think that it&apos;s a riddle, a
+        puzzle that only the wisest and most cunning can solve.
       </p>
-
       <p className="about__text">
-        Гарри в шоке и не мог понять, что происходит. Он подошел к мему и спросил: &quot;Кто
-        ты?&quot;. Мем ответил: &quot;Я твой двойник! Все говорят, что мы очень похожи!&quot;.
-      </p>
-
-      <p className="about__text">
-        Гарри был очень удивлен, но и рад, что у него теперь есть такой забавный именитый двойник. С
-        этого дня мем и Гарри стали неразлучными друзьями и забавным тандемом. Они вместе занимались
-        гимнастикой и создавали смешные фотографии, которые приносили радость всем в зале.
-      </p>
-
-      <p className="about__text">
-        Так вот, некогда гимнастический конь Гарри стал героем интернета и забавным мемом
-        &quot;глазированный творожный сырок на ножках&quot;. Вместе со своим мем-двойником они
-        продолжают радовать людей и показывать, что спорт может быть забавным и интересным для всех.
+        So, tell me, friend: what do you think the song of the cicada means? Is it a secret code, a
+        message from the gods, or simply a beautiful melody to be enjoyed by all? The answer may be
+        closer than you think...
       </p>
     </div>
   );

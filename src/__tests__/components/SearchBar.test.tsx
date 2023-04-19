@@ -1,47 +1,43 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { describe, expect, vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { render } from '@testing-library/react';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { vi } from 'vitest';
+import store from '../../core/store/store';
 
 /**
  * @vitest-environment jsdom
  */
 
-describe('SearchBar component', () => {
-  const mockOnChange = vi.fn();
-  const mockOnSubmit = vi.fn();
+const mockReduxStore = {
+  render,
+  dispatch: vi.fn(),
+  getState: vi.fn(),
+};
 
-  beforeEach(() => {
-    vi.resetAllMocks();
+describe('SearchBar component', (test) => {
+  test('should render correctly', async () => {
+    const { getByPlaceholderText, getByRole } = await mockReduxStore.render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
+
+    expect(getByPlaceholderText(/search/i)).toBeInTheDocument();
+    expect(getByRole('button')).toBeInTheDocument();
   });
 
-  it('should render a search input and a search button', () => {
-    render(<SearchBar value="" onChange={mockOnChange} onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByPlaceholderText('Search');
-    expect(inputElement).toBeInTheDocument();
+  test('should update the input value on change', async () => {
+    const { getByPlaceholderText } = await mockReduxStore.render(
+      <Provider store={store}>
+        <SearchBar />
+      </Provider>
+    );
 
-    const buttonElement = screen.getByText('Search');
-    expect(buttonElement).toBeInTheDocument();
-  });
+    const input = getByPlaceholderText(/search/i);
+    await userEvent.type(input, 'hello');
 
-  it('should call onChange function when the input value is changed', () => {
-    render(<SearchBar value="" onChange={mockOnChange} onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByPlaceholderText('Search');
-    fireEvent.change(inputElement, { target: { value: 'react testing' } });
-    expect(mockOnChange).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call onSubmit function when the search button is clicked', () => {
-    render(<SearchBar value="" onChange={mockOnChange} onSubmit={mockOnSubmit} />);
-    const buttonElement = screen.getByText('Search');
-    fireEvent.click(buttonElement);
-    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call onSubmit function when the Enter key is pressed', () => {
-    render(<SearchBar value="" onChange={mockOnChange} onSubmit={mockOnSubmit} />);
-    const inputElement = screen.getByPlaceholderText('Search');
-    fireEvent.keyPress(inputElement, { key: 'Enter', code: 13, charCode: 13 });
-    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+    expect(input).toHaveValue('hello');
   });
 });

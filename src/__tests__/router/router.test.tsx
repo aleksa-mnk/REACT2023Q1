@@ -16,7 +16,7 @@ describe('Router', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Сырок на ножках')).toBeInTheDocument();
+    expect(screen.getByText('Cicada')).toBeInTheDocument();
   });
 
   it('renders the NotFoundPage when a route is not found', () => {
@@ -26,6 +26,6 @@ describe('Router', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('404 Not Found')).toBeInTheDocument();
+    expect(screen.getByTestId('not-found')).toBeInTheDocument();
   });
 });

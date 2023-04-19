@@ -1,32 +1,49 @@
-import { fireEvent, render } from '@testing-library/react';
-import { ICard } from '../../components/CardItem/CardItem';
+import { render, screen } from '@testing-library/react';
 import CardList from '../../components/CardList/CardList';
-import { vi } from 'vitest';
-
-/**
- * @vitest-environment jsdom
- */
 
 describe('CardList', () => {
-  it('renders without errors', () => {
-    const cards: ICard[] = [];
-    const onCardClick = vi.fn();
-    const { container } = render(<CardList cards={cards} onCardClick={onCardClick} />);
-    expect(container).toBeInTheDocument();
+  test('renders a card list with no cards', () => {
+    render(
+      <CardList
+        cards={{
+          data: [],
+          pagination: { total_count: 0, count: 0, offset: 0 },
+          meta: { status: 200, msg: 'OK', response_id: 'response_id' },
+        }}
+      />
+    );
+    const cardListElement = screen.getByTestId('card-list');
+    expect(cardListElement.children.length).toBe(0);
   });
-});
 
-describe('CardList', () => {
-  it('calls the onCardClick function when a card is clicked', () => {
-    const cards = [
-      { id: '1', title: 'Card 1', imageUrl: '', slug: '', rating: '', source: '' },
-      { id: '2', title: 'Card 2', imageUrl: '', slug: '', rating: '', source: '' },
-      { id: '3', title: 'Card 3', imageUrl: '', slug: '', rating: '', source: '' },
+  test('renders a card list with one card', () => {
+    const testData = [
+      {
+        type: 'gif',
+        id: 'test_id',
+        url: 'test_url',
+        slug: 'test_slug',
+        source: 'test_source',
+        title: 'Test Title',
+        rating: 'g',
+        images: {
+          fixed_height: {
+            url: 'test_url',
+          },
+        },
+      },
     ];
-    const onCardClick = vi.fn();
-    const { getAllByTestId } = render(<CardList cards={cards} onCardClick={onCardClick} />);
-    const cardElements = getAllByTestId('card-item');
-    fireEvent.click(cardElements[1]);
-    expect(onCardClick).toHaveBeenCalledWith(cards[1]);
+
+    render(
+      <CardList
+        cards={{
+          data: testData,
+          pagination: { total_count: 1, count: 1, offset: 0 },
+          meta: { status: 200, msg: 'OK', response_id: 'response_id' },
+        }}
+      />
+    );
+    const cardListElement = screen.getByTestId('card-list');
+    expect(cardListElement.children.length).toBe(1);
   });
 });
