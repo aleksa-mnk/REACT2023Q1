@@ -12,7 +12,7 @@ const SnackImage = ({ field, register, errors }: TypeInputProps) => {
         {...register(field, {
           validate: { checkSnackImage },
         })}
-        className="form-input"
+        className="form-input file"
         aria-label="input-snack-image"
         type="file"
         accept="image/x-png,image/gif,image/jpeg,image/png,image/webp"

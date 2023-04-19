@@ -6,7 +6,7 @@ interface ISnackCardListProps {
 }
 
 const SnackCardList = ({ snacks }: ISnackCardListProps): JSX.Element => (
-  <div className="card-list">
+  <div className="snack-list">
     {snacks.length === 0 ? (
       <h2 className="no-data">No data!</h2>
     ) : (

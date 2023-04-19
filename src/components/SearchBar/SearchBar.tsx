@@ -1,49 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../core/store/store';
+import { getSearchValue, setValue } from '../../core/store/searchSlice';
 
-interface SearchBarProps {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
-}
+const SearchBar = () => {
+  const dispatch = useAppDispatch();
+  const saveSearch = useSelector(getSearchValue);
 
-const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
-  const [searchText, setSearchText] = useState(value);
+  const [search, setSearch] = useState(saveSearch);
 
-  useEffect(() => {
-    const savedValue = localStorage.getItem('searchText');
-    if (savedValue) {
-      setSearchText(savedValue);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('searchText', searchText);
-  }, [searchText]);
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      onSubmit();
-    }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(setValue(search));
   };
 
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) =>
+    setSearch(e.currentTarget.value);
+
   return (
-    <div className="search-bar-container">
+    <form className="search-bar-container" onSubmit={handleSubmit}>
       <input
-        data-testid="Home"
-        type="text"
+        type="search"
         placeholder="Search"
         className="search-bar"
-        value={searchText}
-        onChange={(event) => {
-          setSearchText(event.target.value);
-          onChange(event);
-        }}
-        onKeyPress={handleKeyPress}
+        onChange={handleInputChange}
+        value={search}
+        data-testid="Home"
       />
-      <button className="search-bar-submit" onClick={onSubmit}>
+      <button type="submit" className="search-bar-submit" data-testid="search-button">
         Search
       </button>
-    </div>
+    </form>
   );
 };
 

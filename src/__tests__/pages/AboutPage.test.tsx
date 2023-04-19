@@ -8,6 +8,6 @@ import { describe, expect, it } from 'vitest';
 describe('Test AboutPage component', () => {
   it('renders with correct text', () => {
     render(<AboutPage />);
-    expect(screen.getByText('Сырок на ножках')).toBeInTheDocument();
+    expect(screen.getByText('Cicada')).toBeInTheDocument();
   });
 });

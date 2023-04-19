@@ -1,14 +1,20 @@
 import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import CardItem from '../../components/CardItem/CardItem';
+import CardItem from '../../components/CardList/CardItem';
 
 const fakeCard = {
-  id: 'test-id',
-  title: 'test-title',
-  imageUrl: 'test-img',
-  slug: 'test-slug',
-  rating: 'test-rating',
-  source: 'test-source',
+  type: 'gif',
+  id: '123',
+  url: 'https://example.com/123',
+  slug: 'example-gif',
+  source: '',
+  title: 'Example gif',
+  rating: 'g',
+  images: {
+    fixed_height: {
+      url: 'https://example.com/123.gif',
+    },
+  },
 };
 
 /**

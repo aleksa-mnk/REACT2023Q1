@@ -1,46 +1,61 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import Modal from '../../components/Modal/Modal';
-
 /**
  * @vitest-environment jsdom
  */
 
-describe('Modal component', () => {
-  const mockCard = {
-    id: '1',
-    title: 'Card 1',
-    imageUrl: 'https://example.com/card1.jpg',
-    slug: 'card-1',
-    rating: 'G',
-    source: 'https://test.com',
+import { render, screen, fireEvent } from '@testing-library/react';
+import { afterEach, describe, expect, it } from 'vitest';
+import { vi } from 'vitest';
+import Modal from '../../components/Modal/Modal';
+import { GiphyResponse } from '../../core/store/giphyApi';
+
+describe('Modal', () => {
+  const onClose = vi.fn();
+  const card: GiphyResponse = {
+    type: 'gif',
+    id: '123',
+    url: 'https://giphy.com/123',
+    slug: 'some-slug',
+    source: 'https://example.com',
+    title: 'Some Title',
+    rating: 'g',
+    images: {
+      fixed_height: {
+        url: 'https://media.giphy.com/media/abc/xyz.gif',
+      },
+    },
   };
 
   afterEach(() => {
-    document.body.style.overflow = 'auto';
+    vi.resetAllMocks();
   });
 
-  it('renders null when isOpen is false', () => {
-    render(<Modal isOpen={false} onClose={() => {}} card={mockCard} />);
-    const modal = screen.queryByRole('dialog');
-    expect(modal).not.toBeInTheDocument();
+  it('should render nothing if isOpen is false or card is null', () => {
+    render(<Modal isOpen={false} onClose={onClose} card={null} />);
+    expect(screen.queryByText('Some Title')).toBeNull();
+
+    render(<Modal isOpen={true} onClose={onClose} card={null} />);
+    expect(screen.queryByText('Some Title')).toBeNull();
+
+    render(<Modal isOpen={false} onClose={onClose} card={card} />);
+    expect(screen.queryByText('Some Title')).toBeNull();
   });
 
-  it('renders null when card is null', () => {
-    render(<Modal isOpen={true} onClose={() => {}} card={null} />);
-    const modal = screen.queryByRole('dialog');
-    expect(modal).not.toBeInTheDocument();
+  it('should render the modal when isOpen is true and card is not null', () => {
+    render(<Modal isOpen={true} onClose={onClose} card={card} />);
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByText('Some Title')).toBeInTheDocument();
+    expect(screen.getByAltText('Some Title')).toBeInTheDocument();
   });
 
-  it('renders modal content when isOpen and card are true', () => {
-    render(<Modal isOpen={true} onClose={() => {}} card={mockCard} />);
-    const modal = screen.getByRole('dialog');
-    expect(modal).toBeInTheDocument();
-    expect(screen.getByText('Card 1')).toBeInTheDocument();
-    expect(screen.getByText('Slug: card-1')).toBeInTheDocument();
-    expect(screen.getByText('Rating: G')).toBeInTheDocument();
-    expect(screen.getByText('Source:')).toBeInTheDocument();
-    expect(screen.getByText('https://test.com')).toBeInTheDocument();
-    expect(screen.getByAltText('Card 1')).toBeInTheDocument();
+  it('should call onClose when overlay is clicked', () => {
+    render(<Modal isOpen={true} onClose={onClose} card={card} />);
+    fireEvent.click(screen.getByRole('dialog'));
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should not call onClose when modal image is clicked', () => {
+    render(<Modal isOpen={true} onClose={onClose} card={card} />);
+    fireEvent.click(screen.getByAltText('Some Title'));
+    expect(onClose).not.toHaveBeenCalled();
   });
 });

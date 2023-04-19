@@ -9,6 +9,6 @@ import { describe, it, expect } from 'vitest';
 describe('NotFoundPage', () => {
   it('renders "404 Not Found" text', () => {
     render(<NotFoundPage />);
-    expect(screen.getByText('404 Not Found')).toBeInTheDocument();
+    expect(screen.getByTestId('not-found')).toBeInTheDocument();
   });
 });

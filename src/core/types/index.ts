@@ -1,12 +1,13 @@
 import { FieldErrors, Path, UseFormRegister } from 'react-hook-form';
+import { GiphyResponse } from '../store/giphyApi';
 
 export interface ICard {
   id: string;
   title: string;
-  imageUrl: string;
-  slug: string;
-  rating: string;
   source: string;
+  rating: string;
+  slug: string;
+  imageUrl: string;
 }
 
 export interface IFormValues {
@@ -35,13 +36,27 @@ export type TypeInputProps = {
 };
 
 interface Clickable {
-  onCardClick: (card: ICard) => void;
+  onCardClick?: (card: GiphyResponse) => void;
 }
 
 export interface CardProps extends Clickable {
-  card: ICard;
+  card: GiphyResponse;
+}
+
+export interface GifsResponse {
+  data: GiphyResponse[];
+  pagination: {
+    total_count: number;
+    count: number;
+    offset: number;
+  };
+  meta: {
+    status: number;
+    msg: string;
+    response_id: string;
+  };
 }
 
 export interface CardListProps extends Clickable {
-  cards: ICard[];
+  cards: GifsResponse | never[];
 }

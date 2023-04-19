@@ -20,7 +20,7 @@ export async function searchGifs(query: string, limit = 12, offset = 0) {
   const url = `${BASE_URL}/search?api_key=${API_KEY}&q=${query}&limit=${limit}&offset=${offset}&rating=g&lang=ru`;
   const response = await window.fetch(url);
   const data = await response.json();
-  if (data.data && data.data.length > 0) {
+  if (data?.data && data.data.length > 0) {
     return data.data.map((item: GiphyResponse) => {
       console.log('Item:', item);
       return {

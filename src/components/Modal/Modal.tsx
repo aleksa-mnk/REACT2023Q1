@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ICard } from '../../core/types';
+import { GiphyResponse } from '../../core/store/giphyApi';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  card: ICard | null;
+  card: GiphyResponse | null;
 }
 
 const Modal = ({ isOpen, onClose, card }: ModalProps) => {
@@ -38,7 +38,7 @@ const Modal = ({ isOpen, onClose, card }: ModalProps) => {
 
   const handleCopyImage = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    navigator.clipboard.writeText((card as ICard).imageUrl);
+    navigator.clipboard.writeText((card as GiphyResponse).images.fixed_height.url);
     setShowCopySuccess(true);
     setTimeout(() => {
       setShowCopySuccess(false);
@@ -47,7 +47,7 @@ const Modal = ({ isOpen, onClose, card }: ModalProps) => {
 
   const handleCopySource = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    navigator.clipboard.writeText((card as ICard).source);
+    navigator.clipboard.writeText((card as GiphyResponse).source);
     setShowCopySuccess(true);
     setTimeout(() => {
       setShowCopySuccess(false);
@@ -62,11 +62,15 @@ const Modal = ({ isOpen, onClose, card }: ModalProps) => {
     <div className="overlay modal" role="dialog" aria-modal="true" onClick={handleOverlayClick}>
       <div className="modal__dialog" onClick={handleModalClick}>
         <div className="modal__content">
-          <img className="modal__image" src={card.imageUrl} alt={card.title} />
+          <img className="modal__image" src={card.images.fixed_height.url} alt={card.title} />
           <div className="modal__info">
             <div className="modal__info--copy">
               <h2 className="modal__title">{card.title}</h2>
-              <a href={card.imageUrl} className="modal__info--copy-btn" onClick={handleCopyImage}>
+              <a
+                href={card.images.fixed_height.url}
+                className="modal__info--copy-btn"
+                onClick={handleCopyImage}
+              >
                 Copy image
               </a>
               <a href={card.source} className="modal__info--copy-btn" onClick={handleCopySource}>

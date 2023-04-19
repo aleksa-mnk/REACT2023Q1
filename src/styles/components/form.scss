@@ -25,10 +25,11 @@ $header-font: 'Montserrat', sans-serif;
 }
 
 #input-taste {
-  margin-left: 5px;
+  margin-top: 5px;
 }
 
 .form-input, select {
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: none;
@@ -108,4 +109,8 @@ $header-font: 'Montserrat', sans-serif;
   gap: 20px;
   max-width: 320px;
   flex-wrap: wrap;
+}
+
+.file {
+  color: #1a1a1a;
 }
